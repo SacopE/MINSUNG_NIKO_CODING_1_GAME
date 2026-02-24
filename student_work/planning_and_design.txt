@@ -23,3 +23,6 @@ You spawn in as a 1x3 snake and must eat all of the apples.
 After every apple you eat you get one tile longer.
 You will always get longer and not thicker but you can contort your body however nessesary.
 The game ends after you collect enough apples so that your body fills the entire board.
+
+Expansion Ideas:
+After beating the first board you will unlock larger boards that you can also beat
