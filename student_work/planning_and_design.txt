@@ -15,7 +15,7 @@ The snake that you control cannot run into any walls or itself
 
 Main Objects:
 Snake that becomes larger
-Apples for the snake to collect
+Apples for the snake to collect 
 Walls for the snake to run into
 
 Major Game Elements:
@@ -31,4 +31,4 @@ You will always get longer and not thicker but you can contort your body however
 The game ends after you collect enough apples so that your body fills the entire board.
 
 Expansion Ideas:
-After beating the first board you will unlock larger boards that you can also beat
+After beating the first board you will unlock larger boards that you can also beat (if we get the game done early)
