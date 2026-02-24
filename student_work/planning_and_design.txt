@@ -5,12 +5,18 @@ Part I: Planning & Design (15 pts)
 * Main objects (player, obstacles, goals, enemies, etc.) are identified
 * Sketch a simple plan showing how the game will work step-by-step
 
-Game Idea:
+Game Idea & Core goal:
 Snake
+Collect all of the apples and make you snake take up the entire board
 
 Game Rules:
 5 x 5 board
 The snake that you control cannot run into any walls or itself
+
+Main Objects:
+Snake that becomes larger
+Apples for the snake to collect
+Walls for the snake to run into
 
 Major Game Elements:
 There are apples that spawn around the board that you must go collect.
@@ -19,7 +25,7 @@ for every apple you eat you will gain ten points while having a maximum of 870 p
 Every second is subtracts one point from the total, so completing the game faster will get you more points
 
 Gameplay Process:
-You spawn in as a 1x3 snake and must eat all of the apples.
+You spawn in as a 1x2 snake and must eat all of the apples.
 After every apple you eat you get one tile longer.
 You will always get longer and not thicker but you can contort your body however nessesary.
 The game ends after you collect enough apples so that your body fills the entire board.
