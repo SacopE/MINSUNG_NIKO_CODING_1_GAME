@@ -15,7 +15,8 @@ The snake that you control cannot run into any walls or itself
 Major Game Elements:
 There are apples that spawn around the board that you must go collect.
 After every apple that you collect you get one tile bigger.
-for every apple you eat you will get 
+for every apple you eat you will gain ten points while having a maximum of 870 points
+Every second is subtracts one point from the total, so completing the game faster will get you more points
 
 Gameplay Process:
 You spawn in as a 1x3 snake and must eat all of the apples.
