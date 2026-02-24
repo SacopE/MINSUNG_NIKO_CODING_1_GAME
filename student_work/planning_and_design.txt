@@ -9,7 +9,7 @@ Game Idea:
 Snake
 
 Game Rules:
-10 x 9 board
+5 x 5 board
 The snake that you control cannot run into any walls or itself
 
 Major Game Elements:
