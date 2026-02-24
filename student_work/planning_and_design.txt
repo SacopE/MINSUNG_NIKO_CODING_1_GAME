@@ -10,11 +10,12 @@ Snake
 
 Game Rules:
 10 x 9 board
-You cannot run into any of the walls
+The snake that you control cannot run into any walls or itself
 
 Major Game Elements:
 There are apples that spawn around the board that you must go collect.
 After every apple that you collect you get one tile bigger.
+for every apple you eat you will get 
 
 Gameplay Process:
 You spawn in as a 1x3 snake and must eat all of the apples.
