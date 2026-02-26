@@ -43,12 +43,3 @@ game_data = {
     
 }
 
-<<<<<<< HEAD
-def draw_board(screen):
-    # Print the board and all game elements using curses
-
-
-# Good Luck!
-print("HI")
-=======
->>>>>>> 8332e17 (Added icons)
