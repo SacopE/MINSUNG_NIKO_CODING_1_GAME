@@ -3,20 +3,16 @@ import curses
 game_data = {
     'width': 5,
     'height': 5,
-    'player': {"x": 0, "y": 0, "score": 0, "energy": 10, "max_energy": 10},
-    'eagle_pos': {"x": 4, "y": 4},
+    'player': {"x": 0, "y": 0, "score": 0,},
     'collectibles': [
         {"x": 2, "y": 1, "collected": False},
     ],
 
 
     # ASCII icons
-    'turtle': "\U0001F422",
-    'eagle_icon': "\U0001F985",
-    'obstacle': "\U0001FAA8 ",
-    'empty': "  "
+    'snake': "\U0001F40D",
+    'empty': "  ",
     'apple': '\U0001F34E'
-
 }
 
 def draw_board(stdscr):
@@ -30,16 +26,10 @@ def draw_board(stdscr):
         for x in range(game_data['width']):
             # Player
             if x == game_data['player']['x'] and y == game_data['player']['y']:
-                row += game_data['turtle']
-            # Eagle
-            elif x == game_data['eagle_pos']['x'] and y == game_data['eagle_pos']['y']:
-                row += game_data['eagle_icon']
-            # Obstacles
-            elif any(o['x'] == x and o['y'] == y for o in game_data['obstacles']):
-                row += game_data['obstacle']
+                row += game_data['snake']
             # Collectibles
             elif any(c['x'] == x and c['y'] == y and not c['collected'] for c in game_data['collectibles']):
-                row += game_data['leaf']
+                row += game_data['apple']
             else:
                 row += game_data['empty']
         stdscr.addstr(y, 0, row, curses.color_pair(1))
@@ -53,9 +43,12 @@ game_data = {
     
 }
 
+<<<<<<< HEAD
 def draw_board(screen):
     # Print the board and all game elements using curses
 
 
 # Good Luck!
 print("HI")
+=======
+>>>>>>> 8332e17 (Added icons)
