@@ -1,4 +1,4 @@
-d# The goals for this phase include:
+# The goals for this phase include:
 # - Implement player movement (I suggest W/A/S/D or arrow keys).
 # - Prevent the player from moving off the board or into obstacles.
 # - Track total moves (for high-score).
