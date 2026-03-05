@@ -83,6 +83,10 @@ def move_player(key):
         new_x += 1
     else:
         return  # Invalid key or move off board
+    
+    
+    if new_x == 0 or new_x == game_data['width'] - 1 or new_y == 0 or new_y == game_data['height'] - 1:
+        return False
 
     # Update position and increment score
     game_data['player']['x'] = new_x
