@@ -3,9 +3,9 @@ import random
 import time
 
 game_data = {
-    'width': 5,
-    'height': 5,
-    'player': {"x": 0, "y": 0, "score": 0,},
+    'width': 6,
+    'height': 6,
+    'player': {"x": 0, "y": 0, "score": 0, 'direction': 'south'},
     'collectibles': [
         {"x": 2, "y": 1, "collected": False},
     ],
@@ -138,7 +138,7 @@ def play_snake(stdscr):
                 spawn_apple()
 
 
-                draw_board(stdscr)
+        draw_board(stdscr)
 
         time.sleep(0.1)
 
