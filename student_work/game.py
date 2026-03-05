@@ -5,7 +5,7 @@ import time
 game_data = {
     'width': 7,
     'height': 7,
-    'player': {"x": 0, "y": 0, "score": 0, 'direction': 'south'},
+    'player': {"x": 1, "y": 1, "score": 0, 'direction': 'south'},
     'collectibles': [
         {"x": 2, "y": 1, "collected": False},
     ],
