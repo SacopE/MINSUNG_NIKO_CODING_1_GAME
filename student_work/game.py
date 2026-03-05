@@ -3,8 +3,8 @@ import random
 import time
 
 game_data = {
-    'width': 6,
-    'height': 6,
+    'width': 7,
+    'height': 7,
     'player': {"x": 0, "y": 0, "score": 0, 'direction': 'south'},
     'collectibles': [
         {"x": 2, "y": 1, "collected": False},
@@ -14,7 +14,9 @@ game_data = {
     # ASCII icons
     'snake': "\U0001F40D",
     'empty': "  ",
-    'apple': '\U0001F34E'
+    'apple': '\U0001F34E',
+    'boarder': '\U00002B1B'
+
 }
 
 def display_welcome_screen():
@@ -34,8 +36,11 @@ def draw_board(stdscr):
     for y in range(game_data['height']):
         row = ""
         for x in range(game_data['width']):
+            # Black Perimeter
+            if y == 0 or y == game_data['height'] - 1 or x == 0 or x == game_data['width'] - 1:
+                row += game_data['boarder']
             # Player
-            if x == game_data['player']['x'] and y == game_data['player']['y']:
+            elif x == game_data['player']['x'] and y == game_data['player']['y']:
                 row += game_data['snake']
             # Collectibles
             elif any(c['x'] == x and c['y'] == y and not c['collected'] for c in game_data['collectibles']):
@@ -52,8 +57,6 @@ def draw_board(stdscr):
                   curses.color_pair(1))
     stdscr.refresh()
 
-curses.wrapper(draw_board)
-
 def check_collectibles():
     for c in game_data['collectibles']:
         if (not c["collected"] and
@@ -61,6 +64,7 @@ def check_collectibles():
             game_data['player']["y"] == c["y"]):
 
             c["collected"] = True
+            game_data['player']['score'] += 1
 
 def move_player(key):
     key = key.lower()
@@ -100,8 +104,8 @@ def spawn_apple():
         return
 
     while True:
-        x = random.randint(0, game_data['width'] - 1)
-        y = random.randint(0, game_data['height'] - 1)
+        x = random.randint(1, game_data['width'] - 2)
+        y = random.randint(0, game_data['height'] - 2)
 
         if (x, y) == (game_data['player']['x'], game_data['player']['y']):
             continue
