@@ -84,7 +84,7 @@ def move_player(key):
     else:
         return  # Invalid key or move off board
     
-    
+
     if new_x == 0 or new_x == game_data['width'] - 1 or new_y == 0 or new_y == game_data['height'] - 1:
         return False
 
@@ -144,6 +144,9 @@ def play_snake(stdscr):
             if moved:
                 check_collectibles()
                 spawn_apple()
+            if moved == False:
+                break
+        
 
 
         draw_board(stdscr)
