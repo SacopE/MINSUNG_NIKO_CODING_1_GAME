@@ -65,6 +65,7 @@ def check_collectibles():
 
             c["collected"] = True
             game_data['player']['score'] += 1
+            spawn_apple()
 
 def move_player(key):
     key = key.lower()
@@ -101,22 +102,16 @@ def main(stdscr):
     draw_board(stdscr)
 
 def spawn_apple():
-    active_apples = [c for c in game_data['collectibles'] if not c['collected']]
-    if len(active_apples) >= 3:
-        return
-    if random.random() > 0.2:
-        return
-
     while True:
         x = random.randint(1, game_data['width'] - 2)
-        y = random.randint(0, game_data['height'] - 2)
+        y = random.randint(1, game_data['height'] - 2)
 
+        # Don't spawn on the snake
         if (x, y) == (game_data['player']['x'], game_data['player']['y']):
             continue
-        if any(c['x'] == x and c['y'] == y and not c['collected'] for c in game_data['collectibles']):
-            continue
 
-        game_data['collectibles'].append({"x": x, "y": y, "collected": False})
+        # Replace the apple list with ONE apple
+        game_data['collectibles'] = [{"x": x, "y": y, "collected": False}]
         break
 
 def play_snake(stdscr):
@@ -160,6 +155,6 @@ def play_snake(stdscr):
     time.sleep(3)
 
 display_welcome_screen()
-time.sleep(5.0)
+time.sleep(.0)
 curses.wrapper(play_snake)
 
