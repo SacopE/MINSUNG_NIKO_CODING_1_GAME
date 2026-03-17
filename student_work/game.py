@@ -69,30 +69,35 @@ def check_collectibles():
 
 def move_player(key):
     key = key.lower()
+
+    if key == "w":
+        game_data['player']['direction'] = 'north'
+    elif key == "s":
+        game_data['player']['direction'] = 'south'
+    elif key == "a":
+        game_data['player']['direction'] = 'west'
+    elif key == "d":
+        game_data['player']['direction'] = 'east'
+
+def update_position():
     x = game_data['player']['x']
     y = game_data['player']['y']
+    direction = game_data['player']['direction']
 
-    new_x, new_y = x, y
+    if direction == 'north':
+        y -= 1
+    if direction == 'south':
+        y += 1
+    if direction == 'west':
+        x -= 1
+    if direction == 'east':
+        x += 1
 
-    if key == "w" and y > 0:
-        new_y -= 1
-    elif key == "s" and y < game_data['height'] - 1:
-        new_y += 1
-    elif key == "a" and x > 0:
-        new_x -= 1
-    elif key == "d" and x < game_data['width'] - 1:
-        new_x += 1
-    else:
-        return  # Invalid key or move off board
-    
-
-    if new_x == 0 or new_x == game_data['width'] - 1 or new_y == 0 or new_y == game_data['height'] - 1:
+    if x == 0 or x == game_data['width'] - 1 or y == 0 or y == game_data['height'] - 1:
         return False
-
-    # Update position and increment score
-    game_data['player']['x'] = new_x
-    game_data['player']['y'] = new_y
-
+    
+    game_data['player']['x'] = x
+    game_data['player']['y'] = y
     return True
 
 def main(stdscr):
@@ -131,21 +136,21 @@ def play_snake(stdscr):
             key = None
 
         if key:
-            if key.lower() == "q":
+            if key.lower() == 'q':
                 break
+            move_player(key)
+        moved = update_position()
 
-            moved = move_player(key)
+        if not moved:
+            break
 
-            if moved:
-                check_collectibles()
-            if moved == False:
-                break
+
         
 
 
         draw_board(stdscr)
 
-        time.sleep(0.1)
+        time.sleep(0.5)
 
     stdscr.clear()
     stdscr.addstr(2, 2, "GAME OVER")
