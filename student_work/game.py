@@ -138,7 +138,6 @@ def play_snake(stdscr):
 
             if moved:
                 check_collectibles()
-                spawn_apple()
             if moved == False:
                 break
         
