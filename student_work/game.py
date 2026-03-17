@@ -5,7 +5,9 @@ import time
 game_data = {
     'width': 7,
     'height': 7,
-    'player': {"x": 1, "y": 1, "score": 0, 'direction': 'south'},
+    'player': {'snake': [(1, 1)],
+               'score': 0,
+               'direction': 'south'},
     'collectibles': [
         {"x": 2, "y": 1, "collected": False},
     ],
@@ -40,8 +42,8 @@ def draw_board(stdscr):
             if y == 0 or y == game_data['height'] - 1 or x == 0 or x == game_data['width'] - 1:
                 row += game_data['boarder']
             # Player
-            elif x == game_data['player']['x'] and y == game_data['player']['y']:
-                row += game_data['snake']
+            elif (x, y) in game_data['player']['snake']:
+                row += game_data['snake']   
             # Collectibles
             elif any(c['x'] == x and c['y'] == y and not c['collected'] for c in game_data['collectibles']):
                 row += game_data['apple']
@@ -57,15 +59,6 @@ def draw_board(stdscr):
                   curses.color_pair(1))
     stdscr.refresh()
 
-def check_collectibles():
-    for c in game_data['collectibles']:
-        if (not c["collected"] and
-            game_data['player']["x"] == c["x"] and
-            game_data['player']["y"] == c["y"]):
-
-            c["collected"] = True
-            game_data['player']['score'] += 1
-            spawn_apple()
 
 def move_player(key):
     key = key.lower()
@@ -80,24 +73,40 @@ def move_player(key):
         game_data['player']['direction'] = 'east'
 
 def update_position():
-    x = game_data['player']['x']
-    y = game_data['player']['y']
+    snake = game_data['player']['snake']
+    head_x, head_y = snake[0]
     direction = game_data['player']['direction']
 
     if direction == 'north':
-        y -= 1
-    if direction == 'south':
-        y += 1
-    if direction == 'west':
-        x -= 1
-    if direction == 'east':
-        x += 1
+        head_y -= 1
+    elif direction == 'south':
+        head_y += 1
+    elif direction == 'west':
+        head_x -= 1
+    elif direction == 'east':
+        head_x += 1
 
-    if x == 0 or x == game_data['width'] - 1 or y == 0 or y == game_data['height'] - 1:
+    new_head = (head_x, head_y)
+
+    if head_x == 0 or head_x == game_data['width'] - 1 or head_y == 0 or head_y == game_data['height'] - 1:
         return False
     
-    game_data['player']['x'] = x
-    game_data['player']['y'] = y
+    if new_head in snake:
+        return False
+    
+    snake.insert(0, new_head)
+
+    ate_apple = False
+    for c in game_data['collectibles']:
+        if not c["collected"] and (head_x, head_y) == (c["x"], c["y"]):
+            c["collected"] = True
+            game_data['player']['score'] += 1
+            spawn_apple()
+            ate_apple = True
+            break
+    if not ate_apple:
+        snake.pop()
+
     return True
 
 def main(stdscr):
@@ -112,7 +121,7 @@ def spawn_apple():
         y = random.randint(1, game_data['height'] - 2)
 
         # Don't spawn on the snake
-        if (x, y) == (game_data['player']['x'], game_data['player']['y']):
+        if (x, y) in game_data['player']['snake']:
             continue
 
         # Replace the apple list with ONE apple
@@ -144,7 +153,6 @@ def play_snake(stdscr):
         if not moved:
             break
 
-        check_collectibles()
 
         draw_board(stdscr)
 
