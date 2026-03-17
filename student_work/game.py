@@ -144,9 +144,7 @@ def play_snake(stdscr):
         if not moved:
             break
 
-
-        
-
+        check_collectibles()
 
         draw_board(stdscr)
 
